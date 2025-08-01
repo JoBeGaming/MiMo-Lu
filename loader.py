@@ -37,7 +37,7 @@ def load(file: str) -> dict[str, Value]:
     """
     Load a mimolu file into a dictionary.
     """
-    
+
     with open(file, "r") as f:
         lines = f.readlines()
 
@@ -53,15 +53,15 @@ def load(file: str) -> dict[str, Value]:
 
 def parse(line: str) -> dict[str, Value]:
     keys, values = line.split("->")
-    
+
     keys = parse_keys(keys.strip())
     values = parse_values(values.strip())
     check_value(values)
-    
+
     if len(keys) < len(values):
         array_section = values[...]
         values = values[...] + (list(array_part for array_part in array_section),)
-        
+
     if len(keys) != len(values):
         raise ParsingError("lenght of keys does not match lenght of values")
 
@@ -85,7 +85,8 @@ def check_value(values: list[Value]) -> None:
         if isinstance(value, list):
             if len(value) <= 1:
                 raise ParsingError("arrays must be at least 2 long")
-            check_validity(value)
+            check_value(value)
+
         elif isinstance(value, int):
             pass
         elif isinstance(value, str):
