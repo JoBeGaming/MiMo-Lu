@@ -1,0 +1,7 @@
+@ This is an example
+
+a -> 1; @ A comment
+b -> "two"; @ Valid types are: integers, strings, arrays
+c -> [a, b, 3]; @ Arrays can contain multiple values
+d -> 1, "two", c; @ This is just another way to create arrays
+e, f, g -> 1, [a, b, 4], "five"; @ And here we assign multiple values to multiple variables
