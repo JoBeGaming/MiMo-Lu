@@ -11,10 +11,10 @@ __all__ = [
 ]
 
 
-Literals = int | str
-Array = list
+type Literals = int | str
+type Array[T] = list[T]
 
-Value = Literal | Array[Value]
+type Value = Literals | Array[Value]
 
 
 class ParsingError(Exception):
@@ -28,7 +28,9 @@ class NameReplacer(ast.NodeTransformer):
     def visit_Name(self, node):
         if node.id in self.context:
             value = self.context[node.id]
+
             return ast.Constant(value=value)
+
         return node
 
 
